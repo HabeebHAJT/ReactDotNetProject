@@ -1,29 +1,28 @@
 import { Button, Item, Label, Segment } from "semantic-ui-react";
-import { Activity } from "../../../App/Models/Activity";
 import { useState } from "react";
+import { useStore } from "../../../App/Store/store";
+import { observer } from "mobx-react-lite";
 
-interface Props {
 
-    activities: Activity[];
-    handleSelectedActivity: (id: string) => void;
-    handleDeleteActivity: (id: string) => void;
-    submitting:boolean
 
-}
+function ActivityListItems() {
 
-function ActivityListItems({ activities, handleSelectedActivity, handleDeleteActivity, submitting }: Props) {
+    const { activityStore } = useStore();
+    const { selectActivty, loading, deleteActivity, } = activityStore;
 
     const [target, setTarget] = useState("");
 
+
+
     function handlActivityDelete(e: any, id:string) {
         setTarget(e.target.name);
-        handleDeleteActivity(id)
+        deleteActivity(id)
     }
 
     return (
         <Segment>
             <Item.Group divided>
-                {activities.map(activity => (
+                {activityStore.getListByDate.map(activity => (
                     <Item key={activity.id}>
                         <Item.Content>
                             <Item.Header as='a'>{activity.title}</Item.Header>
@@ -33,8 +32,8 @@ function ActivityListItems({ activities, handleSelectedActivity, handleDeleteAct
                                 <div>{activity.venue},{activity.city}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button floated='right' onClick={() => handleSelectedActivity(activity.id)} color='blue' content='View' />
-                                <Button loading={submitting && target == activity.id}
+                                <Button floated='right' onClick={() => selectActivty(activity.id)} color='blue' content='View' />
+                                <Button loading={loading && target == activity.id}
                                         floated='right'
                                         name={activity.id}
                                         onClick={(e) => handlActivityDelete(e, activity.id)}
@@ -53,4 +52,4 @@ function ActivityListItems({ activities, handleSelectedActivity, handleDeleteAct
   );
 }
 
-export default ActivityListItems;
+export default observer(ActivityListItems);
