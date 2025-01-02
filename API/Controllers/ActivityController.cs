@@ -30,10 +30,10 @@ public class ActivityController : BaseApiController
         return Ok();
     }
 
-    [HttpPut("{id}")]
-    public async Task<ActionResult<Activity>> EditActivity(Guid id,Activity activity)
+    [HttpPut]
+    public async Task<ActionResult<Activity>> EditActivity(Activity activity)
     {
-        activity.Id = id;
+        
         await Mediator.Send(new Edit.Command { Activity = activity });
         return Ok();
     }

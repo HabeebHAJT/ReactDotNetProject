@@ -6,8 +6,9 @@ interface Props {
     activity: Activity | undefined
     handleFormClose: () => void;
     handleEditOrAddActivity: (Activity: Activity) => void;
+    submitting:boolean
 }
-function ActivityForm({ activity: selectedActivity, handleFormClose, handleEditOrAddActivity }: Props) {
+function ActivityForm({ activity: selectedActivity, handleFormClose, handleEditOrAddActivity, submitting }: Props) {
 
     const initialState = selectedActivity ?? {
     id: "",
@@ -42,10 +43,10 @@ function ActivityForm({ activity: selectedActivity, handleFormClose, handleEditO
                 <Form.Input placeholder='Tite' value={activity.title} name="title" onChange={handlInputChange} />
                 <Form.TextArea placeholder='Description' value={activity.description} name="description" onChange={handlInputChange} />
                 <Form.Input placeholder='Category' value={activity.category} name="category" onChange={handlInputChange} />
-                <Form.Input placeholder='Date' value={activity.date} name="date" onChange={handlInputChange} />
+                <Form.Input type="date" placeholder='Date' value={activity.date} name="date" onChange={handlInputChange} />
                 <Form.Input placeholder='City' value={activity.city} name="city" onChange={handlInputChange} />
                 <Form.Input placeholder='Venue' value={activity.venue} name="venue" onChange={handlInputChange} />
-                <Button floated='right' content="Submit" positive></Button>
+                <Button floated='right' loading={submitting} content="Submit" positive></Button>
                 <Button floated='right' onClick={handleFormClose} content="Cancel"></Button>
             </Form>
         </Segment>

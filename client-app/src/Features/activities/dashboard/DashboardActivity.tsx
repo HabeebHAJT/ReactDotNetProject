@@ -14,15 +14,20 @@ interface Props {
     handleFormOpen: (id:string) => void;
     handleFormClose: () => void;
     editMode: boolean;
-    handleEditOrAddActivity: (Activity: Activity) => void
-    handleDeleteActivity: (id: string) => void
+    handleEditOrAddActivity: (Activity: Activity) => void;
+    handleDeleteActivity: (id: string) => void;
+    submitting: boolean
 }
 
-function DashboardActivity({ activities, selectedActivity, handleCanceledActivity, handleSelectedActivity, handleFormOpen, handleFormClose, editMode, handleEditOrAddActivity, handleDeleteActivity }: Props) {
+function DashboardActivity({ activities, selectedActivity, handleCanceledActivity, handleSelectedActivity, handleFormOpen, handleFormClose, editMode, handleEditOrAddActivity, handleDeleteActivity, submitting }: Props) {
     return (
       <Grid>
             <Grid.Column width='10'>
-                <ActivityListItems activities={activities} handleSelectedActivity={handleSelectedActivity} handleDeleteActivity={handleDeleteActivity} />
+                <ActivityListItems activities={activities}
+                    handleSelectedActivity={handleSelectedActivity}
+                    handleDeleteActivity={handleDeleteActivity}
+                    submitting={submitting}
+                />
             </Grid.Column>
             <Grid.Column width='6'>
                 {selectedActivity && !editMode&& <ActivityDetails
@@ -35,7 +40,8 @@ function DashboardActivity({ activities, selectedActivity, handleCanceledActivit
                 {editMode && <ActivityForm
                     activity={selectedActivity}
                     handleFormClose={handleFormClose}
-                    handleEditOrAddActivity={handleEditOrAddActivity }
+                    handleEditOrAddActivity={handleEditOrAddActivity } 
+                    submitting={submitting } 
                 />}
                 
             </Grid.Column>

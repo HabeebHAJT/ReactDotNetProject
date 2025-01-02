@@ -13,6 +13,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\Assets\" />
+    <Folder Include="src\App\API\" />
+    <Folder Include="src\App\NewFolder\" />
     <Folder Include="src\Features\activities\dashboard\" />
   </ItemGroup>
 </Project>
