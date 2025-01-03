@@ -14,7 +14,10 @@
   <ItemGroup>
     <Folder Include="public\Assets\" />
     <Folder Include="src\App\API\" />
+    <Folder Include="src\App\Router\" />
     <Folder Include="src\App\Store\" />
     <Folder Include="src\Features\activities\dashboard\" />
+    <Folder Include="src\Features\Home\" />
+    <Folder Include="src\Features\NewFolder\" />
   </ItemGroup>
 </Project>

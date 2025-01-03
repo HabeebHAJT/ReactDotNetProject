@@ -2,13 +2,14 @@ import { Button, Item, Label, Segment } from "semantic-ui-react";
 import { useState } from "react";
 import { useStore } from "../../../App/Store/store";
 import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 
 
 function ActivityListItems() {
 
     const { activityStore } = useStore();
-    const { selectActivty, loading, deleteActivity, } = activityStore;
+    const {loading, deleteActivity, } = activityStore;
 
     const [target, setTarget] = useState("");
 
@@ -32,7 +33,7 @@ function ActivityListItems() {
                                 <div>{activity.venue},{activity.city}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button floated='right' onClick={() => selectActivty(activity.id)} color='blue' content='View' />
+                                <Button floated='right' as={Link} to={`/activities/${activity.id}`} color='blue' content='View' />
                                 <Button loading={loading && target == activity.id}
                                         floated='right'
                                         name={activity.id}
