@@ -13,11 +13,15 @@
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.3",
+    "calander": "^0.0.2",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.1.0",
     "react": "^18.3.1",
+    "react-calendar": "^5.1.0",
+    "react-calender-horizontal": "^1.0.12",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
+    "rr-calender": "^1.0.12",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",
     "uuid": "^10.0.0"

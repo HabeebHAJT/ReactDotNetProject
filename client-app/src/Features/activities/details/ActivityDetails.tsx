@@ -1,8 +1,12 @@
-import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Image } from "semantic-ui-react";
+import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Grid, GridColumn, Image } from "semantic-ui-react";
 import { useStore } from "../../../App/Store/store";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import ActivityDetailsHeader from "./ActivityDetailsHeader";
+import ActivityDetailsInfo from "./ActivityDetailsInfo";
+import ActivityDetailsChats from "./ActivityDetailsChats";
+import ActivityDetailsSideBar from "./ActivityDetailsSideBar";
 
 
 
@@ -22,25 +26,16 @@ function ActivityDetails() {
     if (activity == undefined) return ""
 
     return (
-        <Card fluid>
-          <Image src={`/Assets/categoryImages/${activity!.category}.jpg`} />
-          <CardContent>
-              <CardHeader>{activity!.title}</CardHeader>
-              <CardMeta>
-                  <span>{activity!.date}</span>
-              </CardMeta>
-              <CardDescription>
-                  {activity!.description}
-              </CardDescription>
-          </CardContent>
-            <CardContent extra>
-                <Button.Group widths='2'>
-                    <Button as={Link} to={`/manage/${activity!.id}`} basic color='blue' content='Edit' />
-                    <Button as={Link} to="/activities" basic color='grey' content='Cancel' />
-
-              </Button.Group>
-          </CardContent>
-      </Card>
+        <Grid>
+            <Grid.Column width="10">
+                <ActivityDetailsHeader activity={activity} />
+                <ActivityDetailsInfo activity={activity} />
+                <ActivityDetailsChats />
+            </Grid.Column>
+            <Grid.Column width="6">
+                <ActivityDetailsSideBar/>
+            </Grid.Column>
+        </Grid>
   );
 }
 
