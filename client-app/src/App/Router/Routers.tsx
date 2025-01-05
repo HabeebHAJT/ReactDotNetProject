@@ -3,6 +3,9 @@ import App from "../Layout/App";
 import DashboardActivity from "../../Features/activities/dashboard/DashboardActivity";
 import ActivityForm from "../../Features/activities/forms/ActivityForm";
 import ActivityDetails from "../../Features/activities/details/ActivityDetails";
+import TestErrors from "../../Features/Errors/TestErrors";
+import NotFound from "../../Features/Errors/NotFound";
+import ServerError from "../../Features/Errors/ServerError";
 
 
 export const routes: RouteObject[] =
@@ -15,7 +18,11 @@ export const routes: RouteObject[] =
             { path: 'activities', element: <DashboardActivity /> },
             { path: 'activities/:id', element: <ActivityDetails /> },
             { path: 'createActivity', element: <ActivityForm key="create" /> },
-            { path: 'manage/:id', element: <ActivityForm key="manage" /> }
+            { path: 'manage/:id', element: <ActivityForm key="manage" /> },
+            { path: 'errors', element: <TestErrors /> },
+            { path: 'not-found', element: <NotFound /> },
+            { path: 'server-error', element: <ServerError /> },
+            { path: '*', element: <NotFound /> }
         ]
     }
 

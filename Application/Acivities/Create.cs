@@ -1,5 +1,9 @@
-﻿using Domain;
+﻿using Application.Core;
+using Domain;
+using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System;
@@ -13,13 +17,21 @@ namespace Application.Acivities
 {
     public class Create
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             public Activity Activity { get; set; }
 
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator() { 
+            
+               RuleFor(c => c.Activity).SetValidator(new ActivityValidator());
+            }
+        }
+
+        public class Handler : IRequestHandler<Command,Result<Unit>>
         {
             private readonly DataContext _dbContext;
             public Handler(DataContext dbContext)
@@ -27,11 +39,18 @@ namespace Application.Acivities
                 _dbContext= dbContext;
             }
 
-            public async Task Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                await _dbContext.Activities.AddAsync(request.Activity);
 
-               _dbContext.SaveChanges();
+               var changes=_dbContext.SaveChanges();
+
+                if(changes<=0)
+                {
+                    return Result<Unit>.Failure("failed to create activity");
+                }
+                return Result<Unit>.Success(Unit.Value);
+
             }
         }
     }

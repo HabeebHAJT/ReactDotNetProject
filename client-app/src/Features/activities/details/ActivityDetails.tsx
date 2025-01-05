@@ -1,6 +1,6 @@
-import { Button, Card, CardContent, CardDescription, CardHeader, CardMeta, Grid, GridColumn, Image } from "semantic-ui-react";
+import {  Grid } from "semantic-ui-react";
 import { useStore } from "../../../App/Store/store";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import ActivityDetailsHeader from "./ActivityDetailsHeader";

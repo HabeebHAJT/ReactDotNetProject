@@ -21,6 +21,7 @@
     "react-calender-horizontal": "^1.0.12",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.1.1",
+    "react-toastify": "^11.0.2",
     "rr-calender": "^1.0.12",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.5",

@@ -9,7 +9,8 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="src\App.css" />
+    <None Remove="src\Features\NewFolder\**" />
+    <TypeScriptConfiguration Remove="src\Features\NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\Assets\" />
@@ -18,6 +19,5 @@
     <Folder Include="src\App\Store\" />
     <Folder Include="src\Features\activities\dashboard\" />
     <Folder Include="src\Features\Home\" />
-    <Folder Include="src\Features\NewFolder\" />
   </ItemGroup>
 </Project>

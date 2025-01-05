@@ -5,6 +5,8 @@ import './App/Layout/style.css'
 import { store, StoreContext } from './App/Store/store'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './App/Router/Routers'
+import "react-calendar/dist/Calendar.css";
+import "react-toastify/dist/ReactToastify.css"
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
