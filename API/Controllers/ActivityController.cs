@@ -1,6 +1,7 @@
 ﻿using Application.Acivities;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -16,6 +17,8 @@ public class ActivityController : BaseApiController
         return Handlresult(await Mediator.Send(new List.Query()));
     }
 
+
+ 
     [HttpGet("{id}")]
     public async Task<ActionResult<Activity>> GetActivity(Guid id)
     {
