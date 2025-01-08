@@ -6,6 +6,7 @@ import ActivityDetails from "../../Features/activities/details/ActivityDetails";
 import TestErrors from "../../Features/Errors/TestErrors";
 import NotFound from "../../Features/Errors/NotFound";
 import ServerError from "../../Features/Errors/ServerError";
+import Login from "../../Features/users/Login";
 
 
 export const routes: RouteObject[] =
@@ -22,6 +23,7 @@ export const routes: RouteObject[] =
             { path: 'errors', element: <TestErrors /> },
             { path: 'not-found', element: <NotFound /> },
             { path: 'server-error', element: <ServerError /> },
+            { path: 'login', element: <Login /> },
             { path: '*', element: <NotFound /> }
         ]
     }

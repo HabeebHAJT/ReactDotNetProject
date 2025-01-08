@@ -6,6 +6,7 @@ interface props {
     name: string;
     placeholder: string;
     label?: string;
+    type?:string
 
 }
 

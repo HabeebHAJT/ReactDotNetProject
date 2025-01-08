@@ -3,6 +3,7 @@ import { Activity } from '../Models/Activity';
 import { toast } from 'react-toastify';
 import { router } from '../Router/Routers';
 import { store } from '../Store/store';
+import { User, userForm } from '../Models/User';
 
 
 
@@ -18,6 +19,16 @@ const sleep = (delay: number) => {
 }
 
 axios.defaults.baseURL = 'http://localhost:5001/api';
+
+axios.interceptors.request.use(
+    config => {
+        const token = store.commonStoere.token;
+        if (token)
+            config.headers.Authorization = `Bearer ${token}`;
+
+        return config;
+    }
+)
 
 axios.interceptors.response.use(async response => {
 
@@ -91,9 +102,18 @@ const Activities = {
     delete: (id: string) => request.delete<Activity>('/Activity/'+id)
 }
 
+const Account = {
+
+    current: () => request.get<User>("/Account"),
+    login: (model: userForm) => request.post<User>('/Account/login', model),
+    register: (model: userForm) => request.post<User>('/Account/register', model),
+
+}
+
 const agent = {
 
-    Activities
+    Activities,
+    Account
 }
 
 export default agent;

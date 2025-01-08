@@ -10,17 +10,16 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="src\App\Common\NewFolder1\**" />
-    <None Remove="src\App\Common\NewFolder\**" />
-    <None Remove="src\Features\NewFolder\**" />
+    <None Remove="src\App\NewFolder\**" />
     <TypeScriptConfiguration Remove="src\App\Common\NewFolder1\**" />
-    <TypeScriptConfiguration Remove="src\App\Common\NewFolder\**" />
-    <TypeScriptConfiguration Remove="src\Features\NewFolder\**" />
+    <TypeScriptConfiguration Remove="src\App\NewFolder\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\Assets\" />
     <Folder Include="src\App\API\" />
+    <Folder Include="src\App\Common\Model\" />
+    <Folder Include="src\App\Common\NewFolder\" />
     <Folder Include="src\App\Common\Options\" />
-    <Folder Include="src\App\NewFolder\" />
     <Folder Include="src\App\Router\" />
     <Folder Include="src\App\Store\" />
     <Folder Include="src\Features\activities\dashboard\" />
