@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Application.Profiles
 {
-    public class AppUser : IdentityUser
+    public class AttendeeProfile
     {
         public string DisplayName { get; set; }
         public string? Bio { get; set; }
 
-        public ICollection<ActivityAtendees> Activities { get; set; }
+        public string Username { get; set; }
+        public string Image { get; set; }
 
     }
 }

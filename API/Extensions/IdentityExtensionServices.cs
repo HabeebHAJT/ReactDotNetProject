@@ -4,7 +4,9 @@ using Application.Core;
 using Domain;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Persistence;
@@ -40,6 +42,17 @@ namespace API.Extensions
                         ValidateAudience = false,
                     };
                 });
+
+            services.AddAuthorization(opt =>
+            {
+
+                opt.AddPolicy("IsActivityHost", policy =>
+                {
+                    policy.Requirements.Add(new IHostRequirments());
+                });
+            });
+
+            services.AddTransient<IAuthorizationHandler,IsHostRequirmentHandler>();
             services.AddScoped<TokenServices>();
             return services;
         }

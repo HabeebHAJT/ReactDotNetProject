@@ -46,16 +46,16 @@ app.MapControllers();
 using var scope=app.Services.CreateScope();
 var service = scope.ServiceProvider;
 
-//try
-//{
-//    var context=service.GetRequiredService<DataContext>();
-//    var usermanger=service.GetRequiredService<UserManager<AppUser>>();
-//    await Seed.SeedData(context, usermanger);
-//}
-//catch(Exception ex)
-//{
+try
+{
+    var context = service.GetRequiredService<DataContext>();
+    var usermanger = service.GetRequiredService<UserManager<AppUser>>();
+    await Seed.SeedData(context, usermanger);
+}
+catch (Exception ex)
+{
 
-//}
+}
 
 
 

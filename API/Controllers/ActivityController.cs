@@ -33,19 +33,29 @@ public class ActivityController : BaseApiController
        
     }
 
-    [HttpPut]
-    public async Task<ActionResult<Activity>> EditActivity(Activity activity)
+    [Authorize(Policy = "IsActivityHost")]
+    [HttpPut("{id}")]
+    public async Task<ActionResult<Activity>> EditActivity(Guid id, Activity activity)
     {
-
+        activity.Id = id;
         return Handlresult(await Mediator.Send(new Edit.Command { Activity = activity }));
         
     }
 
+    [Authorize(Policy = "IsActivityHost")]
     [HttpDelete("{id}")]
     public async Task<ActionResult<Activity>> DeleteActivity(Guid id)
     {
        
        return(Handlresult(await Mediator.Send(new Delete.Command { Id = id })));
      
+    }
+
+    [HttpPost("{id}/attend")]
+    public async Task<ActionResult<Activity>> Attend(Guid id)
+    {
+
+        return Handlresult(await Mediator.Send(new UpdateActivity.Command { id = id }));
+
     }
 }
