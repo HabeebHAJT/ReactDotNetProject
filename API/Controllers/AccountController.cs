@@ -27,7 +27,9 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user= await _userManager.FindByEmailAsync(loginDto.Email);
+            var user= await _userManager.Users
+                .Include(m=>m.Photos)
+                .FirstOrDefaultAsync(m=>m.Email== loginDto.Email);
             if (user == null)
                 return Unauthorized();
             var passwordcheck = await _userManager.CheckPasswordAsync(user, loginDto.Password);
@@ -76,7 +78,8 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<UserDto>> CurrnentUser()
         {
-            var user = await _userManager.FindByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
+            var user = await _userManager.Users.Include(m=>m.Photos)
+                .FirstOrDefaultAsync(m=>m.UserName== User.FindFirstValue(ClaimTypes.Email));
 
             if (user ==null)
                 return BadRequest("UserName already taken");
@@ -90,7 +93,7 @@ namespace API.Controllers
             {
                 UserName = user.UserName,
                 DisplayName = user.DisplayName,
-                Image = null,
+                Image = user?.Photos?.FirstOrDefault(m=>m.IsMain==true)?.Url,
                 Token = _tokenServices.CreateToken(user)
             };
         }

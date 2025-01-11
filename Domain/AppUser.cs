@@ -13,6 +13,7 @@ namespace Domain
         public string? Bio { get; set; }
 
         public ICollection<ActivityAtendees> Activities { get; set; }
+        public ICollection<Photo> Photos { get; set; }
 
     }
 }
