@@ -1,8 +1,9 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
+import { Button, Header, Item, Segment, Image, Label } from 'semantic-ui-react'
 import { Activity } from '../../../App/Models/Activity';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { useStore } from '../../../App/Store/store';
 
 
 const activityImageStyle = {
@@ -23,9 +24,20 @@ interface Props {
 }
 
 export default observer(function ActivityDetailsHeader({ activity }: Props) {
+
+    const { activityStore: { loading, updateAttendance, cancelActivity } } = useStore();
+
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
+                {activity.isCancelled && (
+                    <Label
+                        style={{ position: 'absolute', top: 20, left: -14, zIndex: 1000 }}
+                        color='orange'
+                        ribbon
+                        content="cancelled"
+                    />
+                )}
                 <Image src={`/Assets/categoryImages/${activity.category}.jpg`} fluid style={activityImageStyle} />
                 <Segment style={activityImageTextStyle} basic>
                     <Item.Group>
@@ -38,7 +50,7 @@ export default observer(function ActivityDetailsHeader({ activity }: Props) {
                                 />
                                 <p>{format(activity.date!, "dd MMM yyyy")}</p>
                                 <p>
-                                    Hosted by <strong>Bob</strong>
+                                    Hosted by <strong><Link to={`/profile/${activity.host?.username}`}>{activity.host?.displayName}</Link></strong>
                                 </p>
                             </Item.Content>
                         </Item>
@@ -46,11 +58,35 @@ export default observer(function ActivityDetailsHeader({ activity }: Props) {
                 </Segment>
             </Segment>
             <Segment clearing attached='bottom'>
-                <Button color='teal'>Join Activity</Button>
-                <Button>Cancel attendance</Button>
-                <Button as={Link} to={`/manage/${activity.id}`} color='orange' floated='right'>
-                    Manage Event
-                </Button>
+                {(activity.isHost) ? (
+                    <>
+                        <Button
+                            color={activity.isCancelled ? "green" : "red"}
+                            floated='left'
+                            content={activity.isCancelled ? "Re-Activate Activity" : "Cancel Activity"}
+                            onClick={cancelActivity}
+                            loading={loading}
+                        >
+                            
+                        </Button>
+                        <Button
+                            as={Link} to={`/manage/${activity.id}`}
+                            disabled={activity.isCancelled}
+                            color='orange' floated='right'>
+                            Manage Event
+                        </Button>
+                    </>
+                   
+                ) : (activity.isGoing) ? (
+                    <Button loading={loading} onClick={updateAttendance}>Cancel attendance</Button>
+                ) : (
+                            <Button loading={loading} onClick={updateAttendance}
+                                disabled={activity.isCancelled}
+                                color='teal'>Join Activity</Button>
+                )}
+
+
+
             </Segment>
         </Segment.Group>
     )

@@ -22,7 +22,7 @@
     <Folder Include="src\App\Common\Options\" />
     <Folder Include="src\App\Router\" />
     <Folder Include="src\App\Store\" />
-    <Folder Include="src\Features\activities\dashboard\" />
     <Folder Include="src\Features\Home\" />
+    <Folder Include="src\Features\profile\" />
   </ItemGroup>
 </Project>

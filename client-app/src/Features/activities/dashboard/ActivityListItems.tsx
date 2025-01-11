@@ -20,11 +20,11 @@ function ActivityListItems() {
     return (
         <>
             {getGroupActivities.map(([group, activitylist]) => {
-                console.log("group : " + group); // Corrected placement
+               /* console.log("group : " + group); // Corrected placement*/
 
                 return ( // Ensure you return JSX from the map function
                     <Fragment key={group}>
-                        <Header sub colour="teal">
+                        <Header sub color="teal">
                             {group}
                         </Header>
 
