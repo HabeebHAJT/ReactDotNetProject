@@ -28,10 +28,10 @@ function ActivityListItem({ activity }: Props) {
                 {activity.isCancelled&&(<Label attached="top" color="red" content="Cancelled" style={{ textAlign: "center" }} />)}
                 <Item.Group>
                     <Item>
-                        <Item.Image circular size="tiny" src='/Assets/user.png' style={{marginBottom:4}}></Item.Image>
+                        <Item.Image circular size="tiny" src={activity.host?.image || '/Assets/user.png'} style={{marginBottom:4}}></Item.Image>
                         <Item.Content>
                             <Item.Header as={Link} to={`/activities/${activity.id}`}>{activity.title}</Item.Header>
-                            <Item.Description>Hosted by {activity.host?.displayName}</Item.Description>
+                            <Item.Description>Hosted by <Link to={`/profile/${activity.hostUsername}`}>{activity.host?.displayName}</Link></Item.Description>
                             {activity.isHost && (
                                 <Item.Description>
                                     <Label basic color="orange" content={`You are hosting this activity`} />

@@ -79,7 +79,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> CurrnentUser()
         {
             var user = await _userManager.Users.Include(m=>m.Photos)
-                .FirstOrDefaultAsync(m=>m.UserName== User.FindFirstValue(ClaimTypes.Email));
+                .FirstOrDefaultAsync(m=>m.Email== User.FindFirstValue(ClaimTypes.Email));
 
             if (user ==null)
                 return BadRequest("UserName already taken");
